@@ -11,16 +11,16 @@
     <th:block th:fragment="navbar(current)">
         <div class="container-fluid">   
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="/"><img src="https://st4.depositphotos.com/20837402/25685/v/450/depositphotos_256858836-stock-illustration-book-logo-template-design-minimalist.jpg" alt="Logo Università" height="100" class="m-0"></a>
+                <a class="navbar-brand" href="/"><img src="https://www.tavolartegusto.it/wp/wp-content/uploads/2019/02/pizza-a-forma-di-cuore-Ricetta-Pizza-a-cuore.jpg" alt="Logo pizzeria" height="100" width="100" class="m-0 rounded" ></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" th:classAppend= "${current == 'index'} ? active : not-active" href="/">Home</a>
-                        </li>
                        
+                        <li class="nav-item">
+	                            <a class="nav-link" th:classAppend= "${current == 'menu'} ? active : not-active" href="/menu">Le nostre pizze</a>
+	                        </li>
                     </ul>
                 </div>
             </nav>

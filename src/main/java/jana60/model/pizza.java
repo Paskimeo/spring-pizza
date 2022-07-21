@@ -2,12 +2,17 @@ package jana60.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.Lob;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="pizza")
@@ -17,7 +22,19 @@ public class pizza
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String nome, descrizione, prezzo;
+	@NotEmpty(message = "Non esistono pizze senza nome")
+	@Column(nullable = false)
+	private String nome;
+	
+	
+	@Lob
+	private String descrizione; 
+	
+	
+	@NotNull
+	@DecimalMin("0.00")
+	@DecimalMax("100.00")
+	private Double prezzo;
 
 	public Integer getId() {
 		return id;
@@ -43,11 +60,11 @@ public class pizza
 		this.descrizione = descrizione;
 	}
 
-	public String getPrezzo() {
+	public Double getPrezzo() {
 		return prezzo;
 	}
 
-	public void setPrezzo(String prezzo) {
+	public void setPrezzo(Double prezzo) {
 		this.prezzo = prezzo;
 	}
 
