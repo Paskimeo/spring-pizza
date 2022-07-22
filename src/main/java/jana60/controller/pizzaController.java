@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,15 +40,38 @@ public class pizzaController {
 	}
 	
 	 @PostMapping("/add")
-	  public String save(@Valid @ModelAttribute("pizza") pizza formPizza, BindingResult br) {
-	    if (br.hasErrors()) {
+	  public String save(@Valid @ModelAttribute("pizza") pizza formPizza, BindingResult br, Model model) {
+		 boolean hasErrors = br.hasErrors();
+		 boolean validateNome = true;
+		 if(formPizza.getId() != null) {
+			 pizza pizzaBeforeUpdate = repo.findById(formPizza.getId()).get();
+			 if(pizzaBeforeUpdate.getNome().equals(formPizza.getNome())) {
+				 validateNome = false;
+			 }
+		}
+		 
+		 if (validateNome && repo.countByNome(formPizza.getNome()) > 0) {
+		      br.addError(new FieldError("pizza", "name", "Non ci possono essere due pizze con lo stesso nome"));
+		      hasErrors = true;
+		    }
+		 
+	    if (hasErrors) {
 	      return "/form";
 	    } else {
-	      repo.save(formPizza);
+	    	
+	      try {
+			repo.save(formPizza);
+		} catch (Exception e) {
+			model.addAttribute("errorMessage", "Unable to save the pizza");
+			return "/form";
+		}
+	      
 	      return "redirect:/";
 	    }
-	    
-	 }  
+	  }
+	 
+	 
+	 
 	 // request a http://localhost:8080/delete/2
 	    @GetMapping("/delete/{id}")
 	    public String delete(@PathVariable("id") Integer pizzaId, RedirectAttributes ra) {
@@ -64,18 +88,21 @@ public class pizzaController {
 	    }
 	    }
 	    	
+	    
+	    
+	    
 	    	 @GetMapping("/edit/{id}")
-	    	  public String edit(@PathVariable("id") Integer bookId, Model model) {
-	    	    java.util.Optional<pizza> result = repo.findById(bookId);
+	    	  public String edit(@PathVariable("id") Integer pizzaId, Model model) {
+	    	    java.util.Optional<pizza> result = repo.findById(pizzaId);
 	    	    // controllo se il Book con quell'id è presente
 	    	    if (result.isPresent()) {
 	    	      // preparo il template con al form passandogli il book trovato su db
 
-	    	      model.addAttribute("book", result.get());
-	    	      return "/book/edit";
+	    	      model.addAttribute("pizza", result.get());
+	    	      return "/form";
 	    	    } else {
 	    	      throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-	    	          "Book con id " + bookId + " not present");
+	    	          "Pizza con id " + pizzaId + " not present");
 	    	    }
 	    	
 	    	
