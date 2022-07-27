@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
@@ -22,6 +23,14 @@ public class pizza
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	
+	
+	@ManyToMany
+	private List<Ingredienti> Ingredienti;
+	
+	
+	
+
 	@NotEmpty(message = "Non esistono pizze senza nome")
 	@Column(nullable = false)
 	private String nome;
@@ -67,7 +76,13 @@ public class pizza
 	public void setPrezzo(Double prezzo) {
 		this.prezzo = prezzo;
 	}
+	public List<Ingredienti> getIngredienti() {
+		return Ingredienti;
+	}
 
+	public void setIngredienti(List<Ingredienti> ingredienti) {
+		Ingredienti = ingredienti;
+	}
 	
 	
 }	
