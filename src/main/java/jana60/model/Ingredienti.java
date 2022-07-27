@@ -60,4 +60,8 @@ public List<pizza> getPizza() {
 public void setPizza(List<pizza> pizza) {
 	this.pizza = pizza;
 }
+
+public int getNumberOfIngredienti() {
+    return pizza.size();
+}
 }
