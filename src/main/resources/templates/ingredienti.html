@@ -13,7 +13,7 @@
 			<form 
 				id="form-ingredienti" 
 				th:object="${nuovoIngrediente}"
-				th:action="@{/add}" 
+				th:action="@{/ingredienti/add}" 
 				method="POST">
 
 				<div class="input-group mb-3 has-validation">
@@ -23,7 +23,7 @@
 					<button class="btn btn-primary" type="submit" id="ingredienti-button">Salva</button>
 					<div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
 						<ul>
-							<li th:each="err : ${#fields.errors('nome')}" th:text="${err}">
+							<li th:each="err : ${#fields.errors('name')}" th:text="${err}">
 						</ul>
 					</div>		
 				</div>

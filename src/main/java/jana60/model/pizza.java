@@ -81,7 +81,7 @@ public class pizza
 	}
 
 	public void setIngredienti(List<Ingredienti> ingredienti) {
-		Ingredienti = ingredienti;
+		this.Ingredienti = ingredienti;
 	}
 	
 	

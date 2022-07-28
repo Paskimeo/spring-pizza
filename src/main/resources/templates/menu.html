@@ -2,12 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <th:block th:replace="fragments :: risorse-head"></th:block>
-    <title>Menú</title> 
+    <title>Menu</title> 
   </head>
   <body>
   <nav th:replace="fragments:: navbar('menu')"></nav>
   <div class="container">
-  	<h1>Menú</h1>
+  	<h1>Menu</h1>
   	<hr/>
   	<a class="btn btn-primary" th:href="@{/add}">Aggiungi</a>
   	<table class="table" th:if="${pizza.size() > 0}">

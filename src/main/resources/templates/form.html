@@ -5,7 +5,7 @@
     <title>Add pizza</title> 
   </head>
   <body>
-  	<nav th:replace="fragments :: navbar('menu')"></nav>
+  	<nav th:replace="fragments :: navbar('pizza')"></nav>
   	<div class="container">
   		<h1th:text="${pizza.id != null} ? 'Edit Pizza' : 'New Pizza'"></h1>
   		<hr/>
