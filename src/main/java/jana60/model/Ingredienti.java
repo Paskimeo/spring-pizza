@@ -35,7 +35,7 @@ public void setName(String name) {
 }
 
 
-@ManyToMany(mappedBy = "Ingredienti")
+@ManyToMany(mappedBy = "ingredienti")
 private List<pizza> pizza;
 
 

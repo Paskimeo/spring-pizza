@@ -1,5 +1,7 @@
 package jana60.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -36,6 +39,36 @@ public class pizzaController {
 		model.addAttribute("pizza", repo.findAll());
 		return "/menu";
 	}
+	
+	//aggiunta controllo
+	 @GetMapping("/advanced_search")
+	  public String advancedSearch() {
+	    return "/search";
+	  }
+
+	  @GetMapping("/search")
+	  public String search(@RequestParam(name = "queryNome") String queryNome,
+	      @RequestParam(name = "queryDescrizione", required = false) String queryDescrizione, Model model) {
+
+	    if (queryNome != null && queryNome.isEmpty()) {
+	    	queryNome = null;
+	    }
+	    if (queryDescrizione != null && queryDescrizione.isEmpty()) {
+	    	queryDescrizione = null;
+	    }
+
+	    List<pizza> pizza =
+	        repo.findByNomeContainingOrDescrizioneContainingIgnoreCase(queryNome, queryDescrizione);
+	    model.addAttribute("pizza", pizza);
+	    return "/menu";
+	  }
+	
+	
+	
+	
+	
+	
+	
 	
 	@GetMapping("/add")
 	public String pizzaForm(Model model) {
@@ -113,6 +146,10 @@ public class pizzaController {
 	    	          "Pizza con id " + pizzaId + " not present");
 	    	    }
 	    	
+	    	    
+	    
+	    	    
+	    	    
 	    	
 	  }
 	

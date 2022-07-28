@@ -26,7 +26,7 @@ public class pizza
 	
 	
 	@ManyToMany
-	private List<Ingredienti> Ingredienti;
+	private List<Ingredienti> ingredienti;
 	
 	
 	
@@ -77,11 +77,11 @@ public class pizza
 		this.prezzo = prezzo;
 	}
 	public List<Ingredienti> getIngredienti() {
-		return Ingredienti;
+		return ingredienti;
 	}
 
 	public void setIngredienti(List<Ingredienti> ingredienti) {
-		this.Ingredienti = ingredienti;
+		this.ingredienti = ingredienti;
 	}
 	
 	
