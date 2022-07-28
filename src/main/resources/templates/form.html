@@ -5,7 +5,7 @@
     <title>Add pizza</title> 
   </head>
   <body>
-  	<nav th:replace="fragments :: navbar('pizza')"></nav>
+  	<nav th:replace="fragments :: navbar('menu')"></nav>
   	<div class="container">
   		<h1th:text="${pizza.id != null} ? 'Edit Pizza' : 'New Pizza'"></h1>
   		<hr/>
@@ -63,9 +63,9 @@
   			
   			<div class="col-4">
 				<h4>Ingredienti</h4>
-				<div class="form-check" th:each="ing : ${ingredienti}">
+				<div class="form-check" th:each="ing : ${listaIngredienti}">
 				<input class="form-check-input" th:field="*{ingredienti}" type="checkbox" th:id="|ingredienti_${ing.id}|" th:value="${ing.id}">
-				<label class="form-check-label" th:for="|ingredienti_${ing.id}|" th:text="${ing.nome}"></label>
+				<label class="form-check-label" th:for="|ingredienti_${ing.id}|" th:text="${ing.name}"></label>
 			</div>
   			
   		</form>
